@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loveflix ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* LOGIN SCREEN */
+    .login {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: url("https://images.unsplash.com/photo-1518199266791-5375a83190b7") center/cover no-repeat;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+    }
+
+    .box {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 40px;
+      border-radius: 10px;
+    }
+
+    .logo {
+      color: #e50914;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 12px;
+      width: 220px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #e50914;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    /* MAIN SCREEN */
+    .main {
+      display: none;
+      height: 100vh;
+      background: black;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      font-size: 50px;
+      color: #e50914;
+      margin-top: 40px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    .playBtn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 18px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* APOLOGY SCREEN */
+    .scene {
+      display: none;
+      height: 100vh;
+      background: black;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .heart {
+      font-size: 60px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {transform: scale(1);}
+      50% {transform: scale(1.3);}
+      100% {transform: scale(1);}
+    }
+
+    h2 {
+      font-size: 40px;
+      color: #ff4d6d;
+    }
+
+    p {
+      max-width: 600px;
+      color: #ddd;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .final {
+      display: none;
+      font-size: 28px;
+      margin-top: 20px;
+      color: white;
+      animation: glow 2s infinite;
+    }
+
+    @keyframes glow {
+      0% {text-shadow: 0 0 5px #fff;}
+      50% {text-shadow: 0 0 20px #ff4d6d;}
+      100% {text-shadow: 0 0 5px #fff;}
+    }
+
+    /* hearts */
+    .heart-float {
+      position: absolute;
+      font-size: 18px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {transform: translateY(100vh); opacity: 0;}
+      50% {opacity: 1;}
+      100% {transform: translateY(-10vh); opacity: 0;}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="login">
+  <div class="overlay"></div>
+
+  <div class="box">
+    <div class="logo">LOVEFLIX</div>
+    <h2>Who's watching?</h2>
+
+    <input type="text" id="pass" placeholder="Enter name / code">
+    <br>
+    <button onclick="enter()">Continue ▶</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+  <div class="title">Continue Watching</div>
+  <div class="subtitle">Us 💔❤️</div>
+  <button class="playBtn" onclick="play()">▶ Play</button>
+</div>
+
+<!-- SCENE -->
+<div class="scene" id="scene">
+  <div class="heart">💖</div>
+
+  <h2>I’m Sorry Charuuu</h2>
+
+  <p>
+    I know I messed up 🥺<br><br>
+    I never meant to hurt you.<br>
+    You mean a lot to me, and I don’t want to lose us.<br><br>
+    Please give me a chance to fix things ❤️
+  </p>
+
+  <div class="final" id="finalText">
+    We belong together ❤️
+  </div>
+</div>
+
+<script>
+  function enter() {
+    let val = document.getElementById("pass").value.toLowerCase();
+
+    if (val.includes("charuuu") || val.includes("charu")) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("main").style.display = "flex";
+    } else {
+      alert("Wrong code 🥺 try again");
+    }
+  }
+
+  function play() {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("scene").style.display = "flex";
+
+    setTimeout(() => {
+      document.getElementById("finalText").style.display = "block";
+    }, 3000);
+
+    hearts();
+  }
+
+  function hearts() {
+    setInterval(() => {
+      let h = document.createElement("div");
+      h.classList.add("heart-float");
+      h.innerHTML = "💖";
+      h.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(h);
+
+      setTimeout(() => h.remove(), 6000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
